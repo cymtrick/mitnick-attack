@@ -1,1 +1,6 @@
-# cns-ass2
+cymtrick
+prashanthvarma
+prashanthdomma@gmail.com
+ddu260
+2688076
+Initially the attack blocks the server with syn flood attack. Then for ISN probe I sent around 4-5 syn packets with interval of 0.025 sec and found that difference between the iterations is 11111111.But instead of static value I used prediction in case of dynamic values. Then used the predicted value to send a ACK spoof on behalf of the server to inject the payload.
