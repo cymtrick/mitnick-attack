@@ -16,7 +16,7 @@
 #define TH_URG  0x20
 #define TH_ECE  0x40
 #define TH_CWR  0x80
-#define ETHERNET_HEADER_SIZE 14 //its static
+#define ETHERNET_HEADER_SIZE 14 
 
 struct iphdr
 {
@@ -79,14 +79,6 @@ struct bpf_program bpf;
 bpf_u_int32 netp,maskp;
 char filter[] = "src host 172.16.8.4 and not arp and port 514 and tcp[13]==18";
 int found = 0;
-//void my_callback(u_char *args, const struct pcap_pkthdr* pkthdr, const u_char*
-//    packet)
-//{
-  //  static int count = 1;
-    //fprintf(stdout, "%3d, ", count);
-   // fflush(stdout);
-    //count++;
-//}
 int count = 0;
 u_int prev_seq = 0;
 int repeat = 0;
