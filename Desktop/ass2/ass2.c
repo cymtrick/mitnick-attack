@@ -131,10 +131,13 @@ exit(1);
 
 void parsepackets(u_char *args, const struct pcap_pkthdr *header, const u_char *buffer)
 {
+   if(args || !header)
+	{
+	printf("l");
+	}
     const struct iphdr *ip_hdr = (struct iphdr *) (buffer + ETHERNET_HEADER_SIZE);
     int sizeip = (((ip_hdr)->ip_vhl) & 0x0f) * 4;
     const struct tcphdr *tcp_hdr = (struct tcphdr *) (buffer + ETHERNET_HEADER_SIZE + sizeip);
-    int size_tcp = TH_OFF(tcp_hdr) * 4;
     uint32_t seq = ntohl(tcp_hdr->th_seq);
     if((prev_seq + difference + diff_diff) == seq)
 	{
@@ -184,7 +187,7 @@ void pcapture()
     
 }
 
-int main(int argc, char *argv[])
+int main()
 	{
         char disablepayload[] = "disable";
 
@@ -219,7 +222,7 @@ int main(int argc, char *argv[])
 	build_ip = libnet_build_ipv4(LIBNET_TCP_H + LIBNET_IPV4_H,0,libnet_get_prand(LIBNET_PRu16),0,libnet_get_prand(LIBNET_PR8),IPPROTO_TCP,0,source,destination,NULL,0,libentinit,build_ip);
 	libnet_write(libentinit);
 	i++;
-	usleep(25000);
+	usleep(20000);
 	}
 	pcap_loop(x,-1,parsepackets,NULL);
 	pcap_freecode(&bpf);
